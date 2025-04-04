@@ -1,4 +1,4 @@
-# CodeIgniter 4 Application Starter
+# CodeIgniter 4 CMS Version 4.6.0 Application Starter
 
 ## What is CodeIgniter?
 
@@ -50,7 +50,7 @@ Problems with it can be raised on our forum, or as issues in the main repository
 
 ## Server Requirements
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+PHP 8.4 requires CodeIgniter 4.6.0 or later, with the following extensions installed:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
