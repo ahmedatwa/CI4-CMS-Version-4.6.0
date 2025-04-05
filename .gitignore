@@ -6,6 +6,7 @@
 !*/cache/index.html
 !*/cache/.htaccess
 .DS_Store
+**/.DS_Store
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
