@@ -46,7 +46,7 @@ class Template
      * @param boolean|null     $debug
      * @param LoggerInterface  $logger
     */
-    public function __construct(string $adaptor, FileLocator $locator = null, Registry $registry = null, bool $debug = null, LoggerInterface $logger = null)
+    public function __construct(string $adaptor, ?FileLocator $locator = null, ?Registry $registry = null, ?bool $debug = null, ?LoggerInterface $logger = null)
     {
         $this->locator  = $locator ?? Services::locator();
         $this->registry = $registry ?? Services::registry();

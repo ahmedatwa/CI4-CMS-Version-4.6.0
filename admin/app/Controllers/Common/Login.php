@@ -21,9 +21,9 @@ class Login extends BaseController
             $this->session->setFlashData('warning', lang('en.error.token'));
         }
 
-        $data['forgotten'] = url_to('common/forgotten');
-        $data['authLogin'] = url_to('common/authlogin');
-        $data['base']      = base_url();
+        $data['forgotten'] = url_to('forgotten');
+        $data['authLogin'] = url_to('authlogin');
+        $data['base']      = site_url();
         
         // preserve a flashdata variable
         if (isset($params['redirect'])) {
@@ -88,7 +88,7 @@ class Login extends BaseController
                 if ($this->request->getPost('redirect')) {
                     $json['redirect'] = site_url(strtolower($this->request->getPost('redirect')) . '?user_token=' . $this->session->get('user_token'));
                 } else {
-                    $json['redirect'] = url_to('common.dashboard');
+                    $json['redirect'] = site_url('common/dashboard?user_token=' . $this->session->get('user_token'));
                 }
             }
         }

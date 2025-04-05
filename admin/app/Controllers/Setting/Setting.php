@@ -22,7 +22,7 @@ class Setting extends BaseController
         $json = [];
 
         if ($this->request->isAJAX()) {
-            if (($this->request->getMethod() == 'post')) {
+            if (($this->request->is('post'))) {
                 $this->settingModel->editSetting('config', $this->request->getPost());
                 $json['success'] = lang('setting/setting.text_success');
                 $json['redirect'] = site_url('setting/setting?user_token=' . $this->request->getVar('user_token'));

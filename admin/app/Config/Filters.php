@@ -59,7 +59,7 @@ class Filters extends BaseFilters
         'before' => [
             'forcehttps', // Force Global Secure Requests
             'pagecache',  // Web Page Caching
-           // 'permission',
+            //'permission',
             'events',
             'throttle',
         ],

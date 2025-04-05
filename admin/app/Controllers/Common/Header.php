@@ -12,9 +12,9 @@ class Header extends BaseController
 
         $data['base']       = base_url();
         $data['site_url']   = base_url();
-        $data['home']       = url_to('common.dashboard');
+        $data['home']       = base_url('common/dashboard?user_token=' . $this->session->get('user_token'));
         $data['profile']    = base_url('common/profile', '?user_token=' . $this->session->get('user_token'));
-        $data['logout']     = url_to('common/logout');
+        $data['logout']     = base_url('common/logout');
         $data['activity']   = base_url('report/report', '?user_token=' . $this->session->get('user_token'));
         $data['setting']    = base_url('setting/setting', '?user_token=' . $this->session->get('user_token'));
         $data['configName'] = $this->registry->get('config_name');

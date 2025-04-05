@@ -30,7 +30,7 @@ class Header extends BaseController
         $data['description'] = $this->document->getDescription();
         $data['keywords']    = $this->document->getKeywords();
         $data['scripts']     = $this->document->getScripts();
-
+        $data['theme']       = $this->registry->get('confitg_theme');
         $data['base']        = base_url();
         $data['direction']   = lang($this->locale . '.direction');
         $data['author']      = 'A0twa';
@@ -55,10 +55,10 @@ class Header extends BaseController
         $data['bootstrap_css']    = 'default/vendor/bootstrap/css/bootstrap.min.css';
         $data['fontawesome_css']  = 'default/vendor/fontawesome/css/all.min.css';
         
-        $data['stylesheet_css']   = 'catalog/' . $this->registry->get('config_theme') . '/stylesheet/stylesheet.css'; 
+        $data['stylesheet_css']   = $this->registry->get('config_theme') . '/stylesheet/stylesheet.css'; 
 
         if (lang($this->locale . '.direction') == 'rtl' && file_exists('catalog/' . $this->registry->get('config_theme') .'/stylesheet/stylesheet-rtl.css')) {
-            $data['stylesheet_css']   = 'catalog/' . $this->registry->get('config_theme') . '/stylesheet/stylesheet-rtl.css';
+            $data['stylesheet_css']   = $this->registry->get('config_theme') . '/stylesheet/stylesheet-rtl.css';
             $data['bootstrap_css']    = 'catalog/default/vendor/bootstrap/rtl/bootstrap-rtl.min.css';
 
         } 

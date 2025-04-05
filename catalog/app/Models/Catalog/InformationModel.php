@@ -36,7 +36,7 @@ class InformationModel extends Model
     protected $afterDelete    = [];
 
 
-    public function getInformations(int $limit = null, int $start = 0)
+    public function getInformations(?int $limit = null, int $start = 0)
     {
         $builder = $this->db->table('information i');
         $builder->select();

@@ -1,23 +1,24 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
-$routes->get('/', 'Common\Login::index');
 
 /**
  * @var RouteCollection $routes
  */
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+$routes->get('/', 'Common\Login::index');
+$routes->post('authlogin', 'Common\Login::authLogin');
+$routes->get('logout', 'Common\Logout::index');
+$routes->get('forgotten', 'Common\Forgotten::index');
+$routes->post('resetPassword', 'Common\Forgotten::resetPassword');
+
+
 // Common
 $routes->group('common', static function ($routes) {
     $routes->get('dashboard', 'Common\Dashboard::index', ['as' => 'common.dashboard']);
-    $routes->get('profile', 'Common\Profile::index');
-    $routes->get('filemanager', 'Common\Filemanager::index');
-    $routes->get('logout', 'Common\Logout::index');
-    $routes->get('forgotten', 'Common\Forgotten::index');
-    $routes->post('forgotten/resetPassword', 'Common\Forgotten::resetPassword');
-    $routes->post('authlogin', 'Common\Login::authLogin');
-    
+    $routes->get('filemanager', 'Common\Filemanager::index', ['as' => 'common.filemanager']);
 });
 
 // Catalog
@@ -71,6 +72,7 @@ $routes->group('setting', static function ($routes) {
     $routes->get('extension', 'Setting\Extension::index');
     $routes->get('module', 'Setting\Module::index');
     $routes->get('setting', 'Setting\Setting::index');
+    $routes->post('setting/edit', 'Setting\Setting::edit', ['as' => 'setting.edit']);
     $routes->get('event', 'Setting\Event::index');
 });
 
@@ -104,6 +106,7 @@ $routes->group('user', static function ($routes) {
     $routes->post('User_group/edit', 'User\User_group::edit');
     $routes->post('User_group/add', 'User\User_group::add');
     $routes->post('User_group/delete', 'User\User_group::delete');
+    $routes->get('profile', 'Common\Profile::index');
 });
 
 // Extension
@@ -111,8 +114,12 @@ $routes->group('extension', static function ($routes) {
     $routes->get('analytics', 'extension\Analytics::index');
     $routes->get('dashboard', 'extension\Dashboard::index');
     $routes->get('report', 'extension\Report::index');
-    $routes->get('theme', 'extension\Theme::index');
+   
     $routes->get('blog', 'extension\Blog::index');
+    //theme
+    $routes->get('theme', 'extension\Theme::index');
+    $routes->get('theme/install', 'extension\Theme::install');
+    $routes->get('theme/uninstall', 'extension\Theme::uninstall');
 });
 
 // Modules

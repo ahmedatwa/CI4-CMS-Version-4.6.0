@@ -99,7 +99,7 @@ class Twig
     public function render(string $filename, array $data = [], string $code = ''): string
     {        
         $start = microtime(true);
-
+         
         $benchmark = \Config\Services::timer();
         $fileExt   = pathinfo(ucfirst($filename), PATHINFO_EXTENSION);
         $realPath  = empty($fileExt) ? ucfirst($filename) . '.twig' : ucfirst($filename);
