@@ -23,11 +23,11 @@ class Translation extends BaseController
                 $json['error_warning'] = lang('design/translation.error.permission');
             }
 
-            if (!$json && ($this->request->getMethod() == 'post')) {
+            if (!$json && ($this->request - is('post'))) {
                 $this->translationModel->insert($this->request->getPost());
                 $json['success'] = lang('design/translation.text_success');
                 $json['redirect'] = site_url('design/translation?user_token=' . $this->request->getVar('user_token'));
-            } 
+            }
         }
 
         return $this->response->setJSON($json);
@@ -42,11 +42,11 @@ class Translation extends BaseController
                 $json['error_warning'] = lang('design/translation.error.permission');
             }
 
-            if (!$json && ($this->request->getMethod() == 'post')) {
+            if (!$json && ($this->request - is('post'))) {
                 $this->translationModel->editBanner($this->request->getVar('translation_id'), $this->request->getPost());
                 $json['success'] = lang('design/translation.text_success');
                 $json['redirect'] = site_url('design/translation?user_token=' . $this->request->getVar('user_token'));
-            } 
+            }
         }
 
         return $this->response->setJSON($json);
@@ -61,7 +61,7 @@ class Translation extends BaseController
                 $json['error_warning'] = lang('design/translation.error.permission');
             }
 
-            if (!$json && ($this->request->getMethod() == 'post')) {
+            if (!$json && ($this->request - is('post'))) {
                 if ($this->request->getPost('selected')) {
                     foreach ($this->request->getPost('selected') as $translation_id) {
                         $this->translationModel->delete($translation_id);
@@ -75,7 +75,7 @@ class Translation extends BaseController
         }
         return $this->response->setJSON($json);
     }
-    
+
     public function index()
     {
         $this->document->setTitle(lang('design/translation.heading_title'));
@@ -189,7 +189,7 @@ class Translation extends BaseController
         } else {
             $data['route'] = true;
         }
-        
+
         if ($this->request->getPost('key')) {
             $data['key'] = $this->request->getPost('key');
         } elseif (!empty($translationInfo)) {
@@ -205,7 +205,7 @@ class Translation extends BaseController
         } else {
             $data['value'] = '';
         }
-        
+
         $data['user_token'] = $this->session->get('user_token');
 
         $data['path'] = site_url('design/translation/path?user_token=' . $this->session->get('user_token'));
@@ -221,8 +221,6 @@ class Translation extends BaseController
 
     public function path()
     {
-        helper('filesystem');
-
         $json = [];
 
         if ($this->request->getVar('language_id')) {
@@ -236,13 +234,16 @@ class Translation extends BaseController
         $language_info = $languageModel->find($language_id);
 
         if (!empty($language_info)) {
-            $path = get_filenames(ROOTPATH . 'catalog/Language/' . $language_info['code'], true);
+            helper('filesystem');
+            $path = get_filenames(DIR_LANGUAGE . '/' . $language_info['code'], true);
+
             foreach ($path as $file) {
                 if (substr($file, -4) == '.php') {
-                    $json[] = substr(substr($file, strlen(ROOTPATH . 'catalog/Language/' . $language_info['code'].'/')), 0, -4);
+                    $json[] = substr(substr($file, strlen(DIR_LANGUAGE . '/' . $language_info['code'].'/')), 0, -4);
                 }
             }
         }
+
 
         return $this->response->setJSON($json);
     }
@@ -267,14 +268,14 @@ class Translation extends BaseController
 
         $language_info = $languageModel->find($language_id);
 
-        $directory = ROOTPATH . 'catalog/Language/';
+        $directory = DIR_LANGUAGE . '/';
 
         if ($language_info && is_file($directory . $language_info['code'] . '/' . $route . '.php') && substr(str_replace('\\', '/', realpath($directory . $language_info['code'] . '/' . $route . '.php')), 0, strlen($directory)) == str_replace('\\', '/', $directory)) {
             $_ = [];
             $list = [];
 
             $_ = include($directory . $language_info['code'] . '/' . $route . '.php');
-            
+
             foreach ($_ as $key => $value) {
                 $json[] = [
                     'key'   => $key,

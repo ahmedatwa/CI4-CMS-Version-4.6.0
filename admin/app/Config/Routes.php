@@ -134,9 +134,16 @@ $routes->group('module', static function ($routes) {
 
 // Design
 $routes->group('design', static function ($routes) {
-    $routes->get('layout', 'design\Layout::form');
-    $routes->get('banner', 'design\banner::index');
-    $routes->get('translation', 'layout\Translation::index');
+    $routes->get('layout', 'Design\Layout::form');
+    $routes->get('banner', 'Design\banner::index');
+    // Translation
+    $routes->get('translation', 'Design\Translation::index');
+    $routes->get('translation/form', 'Design\Translation::form');
+    $routes->get('translation/path', 'Design\Translation::path');
+    $routes->get('translation/translation', 'Design\Translation::translation');
+    $routes->post('translation/add', 'Design\Translation::add');
+    $routes->post('translation/edit', 'Design\Translation::edit');
+    $routes->post('translation/delete', 'Design\Translation::delete');
 });
 
 // Customer
