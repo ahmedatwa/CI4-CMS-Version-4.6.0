@@ -11,12 +11,12 @@ class PermissionFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        
+
         // override login route
         if ((string) $request->getUri() == slash_item('baseURL')) {
             return;
         }
-        
+
         $router = service('router');
         $user   = service('user');
 
@@ -31,18 +31,21 @@ class PermissionFilter implements FilterInterface
             $route = strtolower($route);
 
             // Ignore controllers for login Check
-            $ignoreLogin = [
+            $ignoredRoutes = [
                 'common/login',
                 'common/forgotten',
             ];
 
-            if (!$user->isLogged() && !in_array($route, $ignoreLogin)) {
-                echo view_cell('\Admin\Controllers\Common\Login::index', ['redirect' => strtolower($route), 'warning' => lang('en.error.token')]);
+            if (!$user->isLogged() && !in_array($route, $ignoredRoutes)) {
+                echo view_cell(
+                    '\Admin\Controllers\Common\Login::index',
+                    ['redirect' => strtolower($route), 'warning' => lang('en.error.token')]
+                );
                 exit(403);
             }
 
             // Ignore controllers for token Check
-            $ignoreToken = [
+            $ignoreRoutes = [
                 'common/dashboard',
                 'common/login',
                 'common/logout',
@@ -52,8 +55,15 @@ class PermissionFilter implements FilterInterface
             ];
 
             // redirect if not logged in or token expired
-            if (!in_array($route, $ignoreToken) && (!$request->getVar('user_token')) && !session('user_token') || ($request->getVar('user_token') != session('user_token'))) {                
-                echo view_cell('\Admin\Controllers\Common\Login::index', ['redirect' => strtolower($route), 'warning' => lang('en.error.token')]);
+            if (!in_array($route, $ignoreRoutes) &&
+            (!$request->getVar('user_token')) &&
+            !session('user_token') ||
+            ($request->getVar('user_token') !=
+             session('user_token'))) {
+                echo view_cell(
+                    '\Admin\Controllers\Common\Login::index',
+                    ['redirect' => strtolower($route), 'warning' => lang('En.error.token')]
+                );
                 exit(403); // Forbidden
             }
 

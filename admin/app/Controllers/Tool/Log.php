@@ -12,7 +12,7 @@ class Log extends BaseController
 
         // Breadcrumbs
         $data['breadcrumbs'] = [];
-        
+
         $data['breadcrumbs'][] = [
             'text' => lang('en.text_home'),
             'href' => site_url('common/dashboard?user_token=' . $this->request->getVar('user_token')),
@@ -48,7 +48,7 @@ class Log extends BaseController
                 $logs[] = file_get_contents($FileDir, FILE_USE_INCLUDE_PATH, null);
             }
         }
-        
+
         foreach ($logs as $log) {
             $data['log'] = $log;
         }
@@ -66,22 +66,34 @@ class Log extends BaseController
 
     public function clear()
     {
-        
+
         $json = [];
 
-        if ($this->request->is('json')) {
+        if ($this->request->is('post')) {
             if (!$this->user->hasPermission('modify', 'tool/log')) {
                 $json['error_warning'] = lang('tool/log.error.permission');
             }
 
             if (!$json && ($this->request->is('post'))) {
+
                 helper('filesystem');
-                delete_files(WRITEPATH . 'logs/', true, true, true);
+                $files = get_filenames(WRITEPATH . 'logs/');
+                if ($files) {
+                    foreach ($files as $file) {
+                        if (str_ends_with($file, '.log')) {
+                            unset($file);
+                        }
+                    }
+                }
+
+                // delete_files(WRITEPATH . 'logs/', true);
                 $json['redirect'] = site_url('tool/log?user_token=' . $this->request->getVar('user_token'));
                 $json['success']  = lang('tool/log.text_success');
             }
+        } else {
+            $json['error_warning']  = lang('En.error.log.invalidJSON');
         }
-         
+
         return $this->response->setJSON($json);
     }
 

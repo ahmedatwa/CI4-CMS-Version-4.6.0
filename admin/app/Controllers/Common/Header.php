@@ -10,13 +10,13 @@ class Header extends BaseController
     public function index()
     {  
 
-        $data['base']       = base_url();
-        $data['site_url']   = base_url();
-        $data['home']       = base_url('common/dashboard?user_token=' . $this->session->get('user_token'));
-        $data['profile']    = base_url('common/profile', '?user_token=' . $this->session->get('user_token'));
-        $data['logout']     = base_url('common/logout');
-        $data['activity']   = base_url('report/report', '?user_token=' . $this->session->get('user_token'));
-        $data['setting']    = base_url('setting/setting', '?user_token=' . $this->session->get('user_token'));
+        $data['base']       = site_url();
+        $data['site_url']   = site_url();
+        $data['home']       = site_url('common/dashboard?user_token=' . $this->session->get('user_token'));
+        $data['profile']    = site_url('user/profile?user_token=' . $this->session->get('user_token'));
+        $data['logout']     = route_to('logout');
+        $data['activity']   = site_url('report/report', '?user_token=' . $this->session->get('user_token'));
+        $data['setting']    = site_url('setting/setting?user_token=' . $this->session->get('user_token'));
         $data['configName'] = $this->registry->get('config_name');
 
         $data['title']       = $this->document->getTitle();

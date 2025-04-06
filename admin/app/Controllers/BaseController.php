@@ -30,7 +30,8 @@ class BaseController extends Controller
 	 * @var IncomingRequest|CLIRequest
 	 */
 	protected $request;
-
+	protected $user;
+	protected $registry;
 	/**
 	 * An array of helpers to be loaded automatically upon
 	 * class instantiation. These helpers will be available
@@ -39,8 +40,6 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = ['text'];
-	protected $user;
-	protected $registry;
 
 	/**
 	 * Constructor.

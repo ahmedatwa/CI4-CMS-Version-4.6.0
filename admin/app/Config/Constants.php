@@ -14,7 +14,8 @@
  | existing namespaces of App\* namespaced-classes.
  */
 defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'Admin');
-defined('DIR_IMAGE') || define('DIR_IMAGE', realpath(str_replace('admin', 'images', ROOTPATH)) . '/');
+
+defined('DIR_IMAGE') || define('DIR_IMAGE', realpath(str_replace('admin', 'catalog/public/images', ROOTPATH)) . '/');
 defined('APP_VERSION') || define('APP_VERSION', '3.0.0');
 defined('CI_VERSION') || define('CI_VERSION', '4.2.10');
 

@@ -53,6 +53,8 @@ $('#button-delete').on('click', function (e) {
                     dataType: 'json',
                     data: $("input[type=\'hidden\']"),
                     success: function (json) {
+                        console.log(json);
+                        
                         if (json["error_warning"]) {
                             Swal.fire({
                                 position: 'top-end',

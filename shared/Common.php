@@ -163,7 +163,7 @@ if (! function_exists('slash_item')) {
                 throw \CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound("Language/" . $locale ."/" . $locale);
             }
         }
-             
+                 
              // Replace the data with any keys set by language editor
              $translationModel = model('Shared\Models\Design\TranslationModel', false);
              $results = $translationModel->where([
@@ -190,7 +190,7 @@ if (! function_exists('slash_item')) {
          } elseif (substr($line, 0, 2) == $locale) {
              $line = ucfirst($line);
          }
-
+          
          return Services::language($locale)
                         ->getLine($line, $args);
      }

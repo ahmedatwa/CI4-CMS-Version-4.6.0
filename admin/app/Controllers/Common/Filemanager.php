@@ -20,7 +20,7 @@ class Filemanager extends BaseController
         } else {
             $directory = DIR_IMAGE . 'catalog/';
         }
-        
+           
 
         if (substr(str_replace('\\', '/', realpath($directory)), 0, strlen(DIR_IMAGE . 'catalog')) == str_replace('\\', '/', DIR_IMAGE . 'catalog')) {
             $images = directory_map($directory, 1);

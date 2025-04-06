@@ -89,5 +89,6 @@ return [
         'unique'    => 'The {field} field must contain a unique value!',
         'token'     => 'Invalid session token. please login again.',
         'access'    => 'You do not have permission to access this page, please refer to your system administrator.',
+        'invalidJSON' => 'Error: Invalid JSON request.'
     ],
 ];

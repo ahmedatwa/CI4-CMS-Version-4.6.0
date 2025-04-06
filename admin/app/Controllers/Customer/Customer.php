@@ -20,7 +20,7 @@ class Customer extends BaseController
         $json = [];
 
         if ($this->request->isAJAX()) {
-            if (($this->request->getMethod() == 'post') && $this->validateForm()) {
+            if (($this->request->is('post')) && $this->validateForm()) {
                 $this->customerModel->insert($this->request->getPost());
                 $json['success'] = lang('customer/customer.text_success');
                 $json['redirect'] = site_url('customer/customer?user_token=' . $this->request->getVar('user_token'));
@@ -38,7 +38,7 @@ class Customer extends BaseController
         $json = [];
 
         if ($this->request->isAJAX()) {
-            if (($this->request->getMethod() == 'post') && $this->validateForm()) {
+            if (($this->request->is('post')) && $this->validateForm()) {
                 $this->customerModel->update($this->request->getVar('customer_id'), $this->request->getPost());
                 $json['success'] = lang('customer/customer.text_success');
                 $json['redirect'] = site_url('customer/customer?user_token=' . $this->request->getVar('user_token'));

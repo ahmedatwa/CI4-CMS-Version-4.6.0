@@ -12,7 +12,7 @@ class Dashboard extends BaseController
         $this->document->setTitle(lang('common/dashboard.heading_title'));
 
         if (!$this->request->getVar('user_token') || !$this->session->get('user_token') || ($this->request->getVar('user_token') != $this->session->get('user_token'))) {
-            return redirect()->route('/')->with('warning', lang('en.error.error_token'));
+            return redirect()->route('/')->with('warning', lang('En.error.token'));
         }
 
 		$data['breadcrumbs'] = [];

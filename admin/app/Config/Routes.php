@@ -9,16 +9,17 @@ use CodeIgniter\Router\RouteCollection;
 // route since we don't have to scan directories.
 
 $routes->get('/', 'Common\Login::index');
-$routes->post('authlogin', 'Common\Login::authLogin');
-$routes->get('logout', 'Common\Logout::index');
-$routes->get('forgotten', 'Common\Forgotten::index');
-$routes->post('resetPassword', 'Common\Forgotten::resetPassword');
 
 
 // Common
 $routes->group('common', static function ($routes) {
     $routes->get('dashboard', 'Common\Dashboard::index', ['as' => 'common.dashboard']);
     $routes->get('filemanager', 'Common\Filemanager::index', ['as' => 'common.filemanager']);
+    $routes->post('login/authlogin', 'Common\Login::authLogin', ['as' => 'login.auth']);
+    $routes->get('logout', 'Common\Logout::index', ['as' => 'logout']);
+    $routes->post('resetPassword', 'Common\Forgotten::resetPassword');
+    $routes->get('forgotten', 'Common\Forgotten::index');
+    
 });
 
 // Catalog
@@ -98,15 +99,15 @@ $routes->group('report', static function ($routes) {
 $routes->group('user', static function ($routes) {
     $routes->get('user', 'User\User::index');
     $routes->get('user/form', 'User\User::form');
+    $routes->get('user_group', 'User\User_group::index');
+    $routes->get('user_group/form', 'User\User_group::form');
+    $routes->get('profile', 'Common\Profile::index', ['as' => 'user.profile']);
     $routes->post('user/edit', 'User\User::edit');
     $routes->post('user/add', 'User\User::add');
     $routes->post('user/delete', 'User\User::delete');
-    $routes->get('user_group', 'User\User_group::index');
-    $routes->get('user_group/form', 'User\User_group::form');
     $routes->post('User_group/edit', 'User\User_group::edit');
     $routes->post('User_group/add', 'User\User_group::add');
     $routes->post('User_group/delete', 'User\User_group::delete');
-    $routes->get('profile', 'Common\Profile::index');
 });
 
 // Extension
@@ -138,6 +139,10 @@ $routes->group('design', static function ($routes) {
     $routes->get('translation', 'layout\Translation::index');
 });
 
+// Customer
+$routes->group('customer', static function ($routes) {
+    $routes->get('customer/autocomplete', 'Customer\Customer::autocomplete');
+});
 
 // Extenstions Collection
 $routes->group('extensions', ['namespace' => 'Extensions\Controllers'], static function ($routes) {
@@ -176,3 +181,4 @@ $routes->group('extensions', ['namespace' => 'Extensions\Controllers'], static f
     $routes->post('blog/comment/edit', 'Blog\comment::edit');
     $routes->post('blog/comment/delete', 'Blog\comment::delete');
 });
+

@@ -18,11 +18,11 @@ class Login extends BaseController
 
         // user_token validation
         if (($this->request->getVar('user_token') &&  ! $this->session->get('user_token')) || $this->session->get('user_token') != $this->request->getVar('user_token')) {
-            $this->session->setFlashData('warning', lang('en.error.token'));
+            $this->session->setFlashData('warning', lang('En.error.token'));
         }
 
-        $data['forgotten'] = url_to('forgotten');
-        $data['authLogin'] = url_to('authlogin');
+        $data['forgotten'] = route_to('common.forgotten');
+        $data['authLogin'] = site_url('common/login/authlogin');
         $data['base']      = site_url();
         
         // preserve a flashdata variable
