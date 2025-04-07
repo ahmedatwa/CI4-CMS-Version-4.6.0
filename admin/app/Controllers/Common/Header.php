@@ -11,7 +11,7 @@ class Header extends BaseController
     {  
 
         $data['base']       = site_url();
-        $data['site_url']   = site_url();
+        $data['site_url']   = slash_item(env('app.siteURL'));
         $data['home']       = site_url('common/dashboard?user_token=' . $this->session->get('user_token'));
         $data['profile']    = site_url('user/profile?user_token=' . $this->session->get('user_token'));
         $data['logout']     = route_to('logout');

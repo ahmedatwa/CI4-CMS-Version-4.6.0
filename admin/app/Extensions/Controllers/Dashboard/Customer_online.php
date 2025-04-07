@@ -29,7 +29,7 @@ class Customer_online extends BaseController
                 $json['error'] = lang('dashboard/customer_online.error.permission');
             }
 
-            if (! $json && ($this->request->getMethod() == 'post')) {
+            if (! $json && ($this->request->is('post'))) {
                 $settingModel = new SettingModel();
 
                 $settingModel->editSetting('dashboard_customer_online', $this->request->getPost());
@@ -37,7 +37,7 @@ class Customer_online extends BaseController
                 $json['redirect'] = site_url('setting/extension?user_token=' . $this->request->getVar('user_token')  . '&type=dashboard');
             } else {
                 $json['validationErrors'] = $this->validator->getErrors();
-                $json['error_warning'] = lang('en.error.form');
+                $json['error_warning'] = lang('En.error.form');
             }
         }
 
@@ -108,7 +108,7 @@ class Customer_online extends BaseController
 
         $data['online'] = site_url('report/online?user_token=' . $this->request->getVar('user_token'));
 
-        lang('Extensions\Dashboard\customer_online');
+        lang('Extensions\Dashboard\Customer_online');
 
         return $this->template->render('Extensions\Views\Dashboard\customer_online_info', $data);
     }

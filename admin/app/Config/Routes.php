@@ -112,15 +112,14 @@ $routes->group('user', static function ($routes) {
 
 // Extension
 $routes->group('extension', static function ($routes) {
-    $routes->get('analytics', 'extension\Analytics::index');
-    $routes->get('dashboard', 'extension\Dashboard::index');
-    $routes->get('report', 'extension\Report::index');
-   
-    $routes->get('blog', 'extension\Blog::index');
+    $routes->get('analytics', 'Extension\Analytics::index');
+    $routes->get('dashboard', 'Extension\Dashboard::index');
+    $routes->get('report', 'Extension\Report::index');
+    $routes->get('blog', 'Extension\Blog::index');
     //theme
-    $routes->get('theme', 'extension\Theme::index');
-    $routes->get('theme/install', 'extension\Theme::install');
-    $routes->get('theme/uninstall', 'extension\Theme::uninstall');
+    $routes->get('theme', 'Extension\Theme::index');
+    $routes->get('theme/install', 'Extension\Theme::install');
+    $routes->get('theme/uninstall', 'Extension\Theme::uninstall');
 });
 
 // Modules
