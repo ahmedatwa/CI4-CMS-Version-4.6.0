@@ -28,7 +28,7 @@ class User_activity extends BaseController
             $json['error_warning'] = lang('report/user_activity.error.permission');
         }
 
-        if (!$json && $this->request->isAJAX()) {
+        if (!$json && $this->request->is('ajax')) {
             if ($this->request->getPost('selected')) {
                 $userActivityModel = new UserActivityModel();
                 foreach ($this->request->getPost('selected') as $activity_id) {
@@ -37,7 +37,7 @@ class User_activity extends BaseController
                 $json['success'] = lang('report/user_activity.text_success');
                 $json['redirect'] = site_url('report/report?user_token=' . $this->request->getVar('user_token') . '&code=user_activity');
             } else {
-                $json['error_warning'] = lang('en.error.form');
+                $json['error_warning'] = lang('En.error.form');
             }
         }
         return $this->response->setJSON($json);
@@ -81,7 +81,7 @@ class User_activity extends BaseController
 
         lang('Extensions\Dashboard\user_activity');
 
-        return $this->template->render('Extensions\Views\report\user_activity_form', $data);
+        return $this->template->render('Extensions\Views\Report\user_activity_form', $data);
     }
 
     public function report()
@@ -104,7 +104,7 @@ class User_activity extends BaseController
                 'scheme_id=',
                 'child_group_id=',
             ];
-        
+
             $replace = [
                 site_url('user/user/form?user_token=' . $this->request->getVar('user_token') . '&user_id='),
                 site_url('user/user_group/form?user_token=' . $this->request->getVar('user_token') . '&user_group_id='),
@@ -124,7 +124,7 @@ class User_activity extends BaseController
             ];
         }
 
-        
+
         if ($this->request->getPost('selected')) {
             $data['selected'] = (array) $this->request->getPost('selected');
         } else {
@@ -135,7 +135,7 @@ class User_activity extends BaseController
 
         lang('Extensions\Dashboard\user_activity');
 
-        return $this->template->render('Extensions\Views\report\user_activity_info', $data);
+        return $this->template->render('Extensions\Views\Report\user_activity_info', $data);
     }
 
     //--------------------------------------------------------------------
