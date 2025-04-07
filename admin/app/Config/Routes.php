@@ -17,7 +17,7 @@ $routes->group('common', static function ($routes) {
     $routes->get('filemanager', 'Common\Filemanager::index', ['as' => 'common.filemanager']);
     $routes->post('login/authlogin', 'Common\Login::authLogin', ['as' => 'login.auth']);
     $routes->get('logout', 'Common\Logout::index', ['as' => 'logout']);
-    $routes->post('resetPassword', 'Common\Forgotten::resetPassword');
+    $routes->post('forgotten/resetPassword', 'Common\Forgotten::resetPassword');
     $routes->get('forgotten', 'Common\Forgotten::index');
     
 });

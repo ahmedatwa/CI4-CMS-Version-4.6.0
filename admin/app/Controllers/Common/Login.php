@@ -21,7 +21,7 @@ class Login extends BaseController
             $this->session->setFlashData('warning', lang('En.error.token'));
         }
 
-        $data['forgotten'] = route_to('common.forgotten');
+        $data['forgotten'] = site_url('common/forgotten');
         $data['authLogin'] = site_url('common/login/authlogin');
         $data['base']      = site_url();
         

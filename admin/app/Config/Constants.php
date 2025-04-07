@@ -17,8 +17,8 @@ defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'Admin');
 
 defined('DIR_IMAGE') || define('DIR_IMAGE', realpath(str_replace('admin', 'catalog/public/images', ROOTPATH)) . '/');
 defined('DIR_LANGUAGE') || define('DIR_LANGUAGE', realpath(APPPATH . 'Language'));
-defined('APP_VERSION') || define('APP_VERSION', '3.0.0');
-defined('CI_VERSION') || define('CI_VERSION', '4.2.10');
+defined('APP_VERSION') || define('APP_VERSION', '3.2.0');
+defined('CI_VERSION') || define('CI_VERSION', '4.6.0');
 
 /*
  | --------------------------------------------------------------------------

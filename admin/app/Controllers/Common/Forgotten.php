@@ -23,6 +23,7 @@ class Forgotten extends BaseController
         }
 
         $data['forgotten'] = base_url('common/forgotten/resetPassword');
+        $data['cancel'] = base_url('/');
 
         $data['header'] = view_cell('\Admin\Controllers\Common\Header::index');
         $data['footer'] = view_cell('\Admin\Controllers\Common\Footer::index');
