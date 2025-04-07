@@ -27,25 +27,25 @@ application/logs/*
 !/public_html/images/cache/index.html
 
 # Cache Files
-/storage/cache/*
-!/storage/cache/index.html
+/writable/cache/*
+!/writable/cache/index.html
 
 # Log Files
-/storage/logs/*
-!/storage/logs/index.html
+/writable/logs/*
+!/writable/logs/index.html
 
 # Session Files
-/storage/sessions/*
-!/storage/sessions/index.html
+/writable/sessions/*
+!/writable/sessions/index.html
 
 # Upload Files
-/storage/uploads/*
-!/storage/uploads/index.html
+/writable/uploads/*
+!/writable/uploads/index.html
 
 # Download Files
-/storage/download/*
-!/storage/download/index.html
+/writable/download/*
+!/writable/download/index.html
 
 # Debugbar Files
-/storage/debugbar/*
-!/storage/debugbar/index.html
+/writable/debugbar/*
+!/writable/debugbar/index.html
