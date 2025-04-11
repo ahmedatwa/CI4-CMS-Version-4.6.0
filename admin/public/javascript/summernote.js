@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', event => {
 				['para', ['ul', 'ol', 'paragraph']],
 				['table', ['table']],
 				['insert', ['link', 'image', 'video']],
-				['view', ['fullscreen', 'codeview', 'help']]
+				['view', ['fullscreen', 'codeview']]
 			],
 			popover: {
            		image: [

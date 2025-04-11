@@ -15,10 +15,10 @@ $routes->get('/', 'Common\Login::index');
 $routes->group('common', static function ($routes) {
     $routes->get('dashboard', 'Common\Dashboard::index', ['as' => 'common.dashboard']);
     $routes->get('filemanager', 'Common\Filemanager::index', ['as' => 'common.filemanager']);
-    $routes->post('login/authlogin', 'Common\Login::authLogin', ['as' => 'login.auth']);
     $routes->get('logout', 'Common\Logout::index', ['as' => 'logout']);
-    $routes->post('forgotten/resetPassword', 'Common\Forgotten::resetPassword');
     $routes->get('forgotten', 'Common\Forgotten::index');
+    $routes->post('login/authlogin', 'Common\Login::authLogin', ['as' => 'login.auth']);
+    $routes->post('forgotten/resetPassword', 'Common\Forgotten::resetPassword');
     
 });
 

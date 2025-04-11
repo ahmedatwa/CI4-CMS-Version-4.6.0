@@ -15,6 +15,7 @@ use CodeIgniter\Filters\SecureHeaders;
 use Admin\Filters\PermissionFilter;
 use Shared\Filters\ThrottleFilter;
 use Admin\Filters\EventsFilter;
+use Admin\Filters\UserTokenFilter;
 
 class Filters extends BaseFilters
 {
@@ -28,18 +29,19 @@ class Filters extends BaseFilters
      * or [filter_name => [classname1, classname2, ...]]
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
-        'cors'          => Cors::class,
-        'forcehttps'    => ForceHTTPS::class,
-        'pagecache'     => PageCache::class,
-        'performance'   => PerformanceMetrics::class,
-        'permission'    => PermissionFilter::class,
-        'throttle'       => ThrottleFilter::class,
-        'events'        => EventsFilter::class,
+        'csrf'            => CSRF::class,
+        'toolbar'         => DebugToolbar::class,
+        'honeypot'        => Honeypot::class,
+        'invalidchars'    => InvalidChars::class,
+        'secureheaders'   => SecureHeaders::class,
+        'cors'            => Cors::class,
+        'forcehttps'      => ForceHTTPS::class,
+        'pagecache'       => PageCache::class,
+        'performance'     => PerformanceMetrics::class,
+        'permission'      => PermissionFilter::class,
+        'throttle'        => ThrottleFilter::class,
+        'events'          => EventsFilter::class,
+        'usertokenfilter' => UserTokenFilter::class,
     ];
 
     /**
@@ -59,9 +61,9 @@ class Filters extends BaseFilters
         'before' => [
             'forcehttps', // Force Global Secure Requests
             'pagecache',  // Web Page Caching
-            //'permission',
             'events',
             'throttle',
+            //'permission',
         ],
         'after' => [
             'pagecache',   // Web Page Caching
@@ -80,9 +82,11 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
+            'permission',
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
+           // 'usertokenfilter',
         ],
         'after' => [
             // 'honeypot',

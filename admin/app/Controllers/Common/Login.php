@@ -22,16 +22,20 @@ class Login extends BaseController
         }
 
         $data['forgotten'] = site_url('common/forgotten');
-        $data['authLogin'] = site_url('common/login/authlogin');
+        $data['authLogin'] = base_url('common/login/authlogin');
         $data['base']      = site_url();
         
         // preserve a flashdata variable
-        if (isset($params['redirect'])) {
-            $this->session->setTempdata('redirect', $params['redirect'], 300);
-        } else {
-            $this->session->setTempdata('redirect', $this->session->getFlashdata('redirect'), 300);
+         
+        if ($this->session->getFlashdata('route') !== null) {
+            $this->session->setTempdata('route', $this->session->getFlashdata('route'), 300);
         } 
 
+        if ($this->session->getFlashdata('query') !== null) {
+            $this->session->setTempdata('query', $this->session->getFlashdata('query'), 300);
+        } 
+
+        
         if (!empty($this->request->getPost('email', FILTER_SANITIZE_EMAIL))) {
             $data['email'] = $this->request->getPost('email');
         } else {
@@ -43,13 +47,27 @@ class Login extends BaseController
         } else {
             $data['password'] = '';
         }
-
-        if ($this->session->getTempdata('redirect')) {
-            $data['redirect'] = $this->session->getTempdata('redirect');
-        } else {
-            $data['redirect'] = '';
+        
+        $uri = $this->request->getUri();
+        $query  = $uri->getQuery();
+        $data['redirectQuery'] = '';
+        if($query) {
+            $explode = explode("&", $query);
+            if(sizeof($explode) > 1) {
+                unset($explode[0]);
+                $data['redirectQuery'] = '&' . implode("&", $explode);
+            }
         }
+        
+        // d($implode);
+       $segments = $uri->getSegments();
 
+       if ($this->session->getTempdata('route') !== null) {
+            $data['redirect'] = strtolower($this->session->getTempdata('route')) . '?user_token' . $this->session->getTempdata('query');
+        } else {
+            $data['redirect'] = implode('/', $segments);
+        }
+         
 
         if (isset($params['warning']))  {
             $data['warning'] = $params['warning'];
@@ -64,15 +82,16 @@ class Login extends BaseController
         
         // Make language data available to view  
         lang('Common/Login');
-
+         
         return $this->template->render('common/login', $data);
     }
 
     public function authLogin()
     {
         $json = [];
-
-        if ($this->request->is('ajax') && ($this->request->is('post'))) {
+        
+        if ($this->request->isAjax() && ($this->request->is('post'))) {
+           
             if (! $this->validate([
                 'email'    => 'required',
                 'password' => 'required|min_length[4]',
@@ -85,8 +104,11 @@ class Login extends BaseController
                 // set Token
                 $this->session->set('user_token', token(32));
                 // get Redirect Url if set
-                if ($this->request->getPost('redirect')) {
-                    $json['redirect'] = site_url(strtolower($this->request->getPost('redirect')) . '?user_token=' . $this->session->get('user_token'));
+                $redirect = $this->request->getPost('redirect');
+                if($redirect) {
+                    $url = strtolower($redirect) . '?user_token=' . $this->session->get('user_token') . $this->request->getPost('redirect_query');
+
+                    $json['redirect'] = site_url($url);
                 } else {
                     $json['redirect'] = site_url('common/dashboard?user_token=' . $this->session->get('user_token'));
                 }
