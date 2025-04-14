@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', event => {
 			disableDragAndDrop: true,
 			height: 300,
 			emptyPara: '',
+			dialogsFade: true,
 			codemirror: { // codemirror options
 				mode: 'text/html',
 				htmlMode: true,
@@ -32,7 +33,12 @@ window.addEventListener('DOMContentLoaded', event => {
 					['float', ['floatLeft', 'floatRight', 'floatNone']],
 					['remove', ['removeMedia']]
 				],
-			},			
+			},
+			callbacks: {
+     onPaste: function(e) {
+      console.log(e.currentTarget.innerText);
+    }
+  },			
 			buttons: {
     			image: function() {
 					var ui = $.summernote.ui;
@@ -41,7 +47,7 @@ window.addEventListener('DOMContentLoaded', event => {
 					var button = ui.button({
 						contents: '<i class="note-icon-picture" />',
 						tooltip: $.summernote.lang[$.summernote.options.lang].image.image,
-						click: function () {
+						click: () => {
 							$('#modal-image').remove();
 							
 							$.ajax({
@@ -69,6 +75,23 @@ window.addEventListener('DOMContentLoaded', event => {
 									});
 								}
 							});						
+						}
+					},
+					{
+						contents: '<i class="fab fa-html5"/>',
+						tooltip: 'paste HTML',
+						click: (context) => {
+							html = '<div class="modal-dialog" role="document">';
+							html+= '<div class="modal-content"> <div class="modal-header"><h5 class="modal-title">Paste HTML</h5>';
+							html += ' <button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+							html += '<span aria-hidden="true">&times;</span></button></div>';
+							html += '<div class="modal-body"><textarea></textarea></div>';
+							html += '<div class="modal-footer"><button type="button" class="btn btn-primary">Save changes</button>';
+							html += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div>';
+							html += '</div>';
+							$('body').append('<div id="modal-html" class="modal">' + html +'</div>');
+							$('#modal-html').modal('show');
+							//context.invoke('editor.pasteHTML', 'hello');
 						}
 					});
 				
