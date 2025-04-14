@@ -46,6 +46,10 @@ application/logs/*
 /writable/download/*
 !/writable/download/index.html
 
+# cache Files
+/writable/cache/*
+!/writable/cache/index.html
+
 # Debugbar Files
 /writable/debugbar/*
 !/writable/debugbar/index.html
