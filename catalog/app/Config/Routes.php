@@ -16,7 +16,7 @@ $routes->get('{locale}/((?=sp-)[a-zA-z- 0-9]+$)', 'Information\Information::inde
 //
 // Category
 $routes->get('{locale}/category/(:alphanum)', 'Product\Category::index/$1/$2', ['as' => 'product.category']);
-
+$routes->get('common/language/save', 'Common\Language::save');
 // Account
 $routes->group('{locale}/account', static function($routes)
 {

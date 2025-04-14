@@ -16,14 +16,15 @@ class Header extends BaseController
         $data['analytics'] = [];
 
         $analytics = $extensionModel->getInstalled('analytics');
-       // dd($analytics);
-        if($analytics) {
-		foreach ($analytics as $analytic) {
-			if ($this->registry->get('analytics_' . $analytic)['status']) {
-				$data['analytics'][] = html_entity_decode($this->registry->get('analytics_' . $analytic)['code'], ENT_QUOTES, 'UTF-8');;
-			}
-		}
-    }
+        // dd($analytics);
+        if ($analytics) {
+            foreach ($analytics as $analytic) {
+                if ($this->registry->get('analytics_' . $analytic)['status']) {
+                    $data['analytics'][] = html_entity_decode($this->registry->get('analytics_' . $analytic)['code'], ENT_QUOTES, 'UTF-8');
+                    ;
+                }
+            }
+        }
 
         $data['lang']        = $this->locale;
         $data['title']       = $this->document->getTitle();
@@ -31,19 +32,19 @@ class Header extends BaseController
         $data['keywords']    = $this->document->getKeywords();
         $data['scripts']     = $this->document->getScripts();
         $data['theme']       = $this->registry->get('confitg_theme');
-        $data['base']        = base_url();
+        $data['base']        = slash_item(env('app.baseURL'));
         $data['direction']   = lang($this->locale . '.direction');
         $data['author']      = 'A0twa';
         $data['ico']         = base_url() . DIRECTORY_SEPARATOR . 'favicon.ico';
         $data['home']        = route_to('home');
 
-        
+
         if (is_file(DIR_IMAGE . $this->registry->get('config_logo'))) {
             $data['logo'] = base_url('images') . DIRECTORY_SEPARATOR . $this->registry->get('config_logo');
         } else {
             $data['logo'] = '';
         }
-       
+
         // Blog
         if ($this->registry->get('blog_extension_status')) {
             $data['blog'] = route_to('blog');
@@ -52,16 +53,16 @@ class Header extends BaseController
         }
 
         // Hard coding css so they can be replaced via the events system.
-        $data['bootstrap_css']    = 'default/vendor/bootstrap/css/bootstrap.min.css';
+        $data['bootstrap_css']    = 'default/vendor/bootstrap/dist/css/bootstrap.min.css';
         $data['fontawesome_css']  = 'default/vendor/fontawesome/css/all.min.css';
-        
-        $data['stylesheet_css']   = $this->registry->get('config_theme') . '/stylesheet/stylesheet.css'; 
+
+        $data['stylesheet_css']   = $this->registry->get('config_theme') . '/stylesheet/stylesheet.css';
 
         if (lang($this->locale . '.direction') == 'rtl' && file_exists('catalog/' . $this->registry->get('config_theme') .'/stylesheet/stylesheet-rtl.css')) {
             $data['stylesheet_css']   = $this->registry->get('config_theme') . '/stylesheet/stylesheet-rtl.css';
             $data['bootstrap_css']    = 'catalog/default/vendor/bootstrap/rtl/bootstrap-rtl.min.css';
 
-        } 
+        }
 
         $data['links']       = $this->document->getLinks();
         $data['styles']      = $this->document->getStyles();

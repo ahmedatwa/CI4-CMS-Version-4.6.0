@@ -15,7 +15,7 @@ class Language extends BaseController
         } else {
             $code = $this->locale;
         }
-
+        
         $data['language_code'] = $code;
 
         $uri = '';
@@ -30,7 +30,7 @@ class Language extends BaseController
 
         $languageModel = new LanguageModel();
         $results = $languageModel->where('status', 1)->findAll();
-
+         
         foreach ($results as $result) {
             if (substr($path, 0, strlen($code)) == $code) {
                 // $path for named/reverse-routed URI
@@ -74,8 +74,8 @@ class Language extends BaseController
             'path'     => config('Cookie')->path,
             'prefix'   => config('Cookie')->prefix,
             'secure'   => config('Cookie')->secure,
-            'httponly' => config('Cookie')->httpOnly,
-            'samesite' => config('Cookie')->SameSite
+            'httponly' => config('Cookie')->httponly,
+            'samesite' => config('Cookie')->samesite
         ];
 
         $this->response->setCookie($cookie);
